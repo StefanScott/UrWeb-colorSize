@@ -1,0 +1,40 @@
+# compile the program
+# first change the values for user and password below!
+
+urweb -dbms postgres -db "host=localhost port=5432 user=scott password='pw' dbname=color_size" colorSize
+
+# optional
+dropdb color_size
+
+# create the database
+createdb color_size
+
+# run the script generated during the compile
+psql -f color_size.sql color_size
+
+# optional - dump an existing database
+pg_dump -a --column-inserts color_size >color_size.dml.sql
+
+# optional - restore an existing database
+psql -f color_size.dml.sql color_size
+
+# minimal "server block" for nginx - change the server names below!
+
+server {
+  listen 80;
+  server_name 
+    personalenglish.org
+    www.personalenglish.org
+    *.personalenglish.org;
+
+  location / {
+    proxy_pass http://127.0.0.1:8080/;
+  }
+}
+
+# run the program (using nohup for "no hang-up")
+
+nohup ./colorSize.exe &
+
+# launch a browser, and point it to:
+http://personalenglish.org/ColorSize/main

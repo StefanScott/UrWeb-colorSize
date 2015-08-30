@@ -1,0 +1,5 @@
+database dbname=color_size
+sql color_size.sql
+allow url /ColorSize/main
+
+colorSize
